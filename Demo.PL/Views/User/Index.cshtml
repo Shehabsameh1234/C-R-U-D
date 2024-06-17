@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+  
+}
+
+<h1 class="my-3">All Users</h1>
+
+
+@if (Model?.Count() > 0)
+{
+    <div class="row justify-content-center align-items-center mt-5 ">
+        <form class="row col-8 offset-2" asp-action="Index">
+            <div class="col-8 ">
+                <input type="text" class="form-control" name="SearchValue" placeholder="Search By Email" />
+            </div>
+            <div class="col-4">
+                <input type="submit" value="Search" class="btn btn-success " />
+            </div>
+        </form>
+    </div>
+    <table class="table table-responsive mt-3 table-striped table-hover ">
+        <thead>
+            <tr>
+  
+                <th>@Html.DisplayNameFor(E => E.Id)</th>
+                <th>@Html.DisplayNameFor(E => E.UserName)</th>
+                <th>@Html.DisplayNameFor(E => E.Email)</th>
+                <th>Deatails</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+
+                    <partial model="user.Id.ToString()" name="_ButtonsPartial" />
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+
+    <div class="mt-5 alert alert-warning">
+        <h3>there is no Users</h3>
+    </div>
+}
+
+
+
+
+

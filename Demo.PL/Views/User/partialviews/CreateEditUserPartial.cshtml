@@ -1,0 +1,10 @@
+﻿@model ApplicationUser
+<div asp-validation-summary="All"></div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="UserName"></label>
+    <input type="text" asp-for="UserName" class="form-control" />
+    <span asp-validation-for="UserName" class="text-danger"></span>
+</div>
+
+
+   

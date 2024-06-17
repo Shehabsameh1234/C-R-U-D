@@ -1,0 +1,27 @@
+﻿@model ApplicationRole
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+
+<h1 class="my-3">Create new Role</h1>
+
+<form asp-action="Create" >
+
+    <partial name="PartialViews/CreateEditRolePartial" />
+ 
+
+    <input type="submit" value="Create" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-light">back to list</a>
+
+</form>
+
+
+
+@section ValidationScript {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+

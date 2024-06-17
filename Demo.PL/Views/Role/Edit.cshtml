@@ -1,0 +1,22 @@
+﻿@model ApplicationRole
+@{
+    ViewData["Title"] = "Edit";
+
+}
+<h1 class="my-3">Edit Role</h1>
+
+<form asp-action="Edit">
+    <div asp-validation-summary="All"></div>
+    <partial name="PartialViews/CreateEditRolePartial" />
+    <input type="submit" asp-action="AddOrRemoveUsers1"asp-route-roleId="@Model.Id" value="Add or remove users" class="btn btn-primary" />
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-light">Cancel</a>
+
+</form>
+@section ValidationScript {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+

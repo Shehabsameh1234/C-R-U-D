@@ -1,0 +1,16 @@
+﻿@model DepartmentViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="my-3">are you sure Delete</h1>
+
+
+<form asp-action="Delete"  asp-route-id="@Model.Id">
+ 
+    <partial name="PartialViews/DetailsDeleteDepPartial" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-light">Cancel</a>
+
+</form>
+

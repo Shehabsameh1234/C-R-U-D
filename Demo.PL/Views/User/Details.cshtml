@@ -1,0 +1,15 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="my-3">User Details</h1>
+
+<form asp-action="Edit" method="get" asp-route-id="@Model.Id">
+
+    <partial name="PartialViews/DetailsDeleteUserPartial" />
+    <input type="submit" value="Edit" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-light">back to list</a>
+
+</form>
+

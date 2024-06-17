@@ -1,0 +1,24 @@
+﻿@model DepartmentViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="my-3">Edit Department</h1>
+
+<form asp-action="Edit">
+    <div asp-validation-summary="All"></div>
+    <Partial name="PartialViews/CreateEditDepartmentPartial" />
+    <div class="form-group">
+        <label class="col-form-label" asp-for="DateOfCreation"></label>
+        <input type="date" asp-for="DateOfCreation" value="@Model.DateOfCreation.Date.ToString("yyyy-MM-dd")" class="form-control" />
+        <span asp-validation-for="DateOfCreation" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-light">back to list</a>
+
+</form>
+
+@section ValidationScript {
+    <partial name="_ValidationScriptsPartial" />
+}
+

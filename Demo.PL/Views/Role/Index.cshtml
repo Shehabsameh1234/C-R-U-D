@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ApplicationRole>
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<h1 class="my-3">All Roles</h1>
+
+<a asp-controller="Role" asp-action="Create" class="btn btn-primary">create new Role</a>
+
+
+@if (Model?.Count() > 0)
+{
+    <table class="table table-responsive mt-3 table-striped table-hover ">
+        <thead>
+            <tr>
+
+                <th>@Html.DisplayNameFor(E => E.Id)</th>
+                <th>@Html.DisplayNameFor(E => E.Name)</th>
+                <th>@Html.DisplayNameFor(E => E.CreateAt)</th>
+                <th>Deatails</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <th>@role.Id</th>
+                    <th>@role.Name</th>
+                    <th>@role.CreateAt</th>
+
+                    <partial model="role.Id.ToString()" name="_ButtonsPartial" />
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+
+    <div class="mt-5 alert alert-warning">
+        <h3>there is no Roles</h3>
+    </div>
+}
+
+
+
+
+
