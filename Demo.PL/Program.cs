@@ -48,34 +48,14 @@ namespace Demo.PL
                 config.Password.RequiredLength = 3;
                 config.Password.RequireNonAlphanumeric = false;
                 config.User.RequireUniqueEmail = true;
-                //config.Lockout.MaxFailedAccessAttempts = 3;
-                //config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
-                //config.Lockout.AllowedForNewUsers = true;
+                
             }).AddEntityFrameworkStores<AppDbConText>().AddDefaultTokenProviders();
             builder.Services.ConfigureApplicationCookie(Config =>
             {
                 Config.LoginPath = "/Account/LogIn";
-                Config.AccessDeniedPath = "/Home/Error";
-                //Config.ExpireTimeSpan= TimeSpan.FromMinutes(1);
-
+                Config.AccessDeniedPath = "/Home";
+               
             });
-
-            ////add schema cookies is default
-            ////services.AddAuthentication("Cookies")
-            ////        .AddCookie("Hamada", Config =>
-            ////        {
-            ////            Config.LogoutPath = "/Account/SignIn";
-            ////            Config.AccessDeniedPath = "/Home/Index";
-            ////        });
-            /// services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            // .AddCookie(options =>
-            // {
-            //	 options.Cookie.Name = "YourAppCookie";
-            //	 options.LoginPath = "/Account/Login"; // Specify the login path
-            //	 options.AccessDeniedPath = "/Account/AccessDenied"; // Specify the access denied path
-            // });
-            //services.AddAuthorization();
 
             #endregion
            
