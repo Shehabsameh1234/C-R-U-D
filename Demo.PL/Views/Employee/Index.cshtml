@@ -2,23 +2,9 @@
 @model IEnumerable<EmpViewModel>
 @{
     ViewData["Title"] = "Index";
-    //string viewDataMessege = ViewData["messege"] as string; //type conversion
-    //string viewDataMessege1 = ViewBag["messege"] ;//dynamic
-    
+   
+}
 
-}
-@* @if (!string.IsNullOrEmpty(TempData["messege"]as string))
-{
-    <div class="alert alert-danger">
-        @TempData["messege"]
-    </div>
-}
-<div class="alert alert-danger">
-    @ViewData["messege"]
-</div>
-<div class="alert alert-danger">
-    @ViewBag.messege
-</div> *@
 
 <h1 class="my-3">All Employees</h1>
 
@@ -43,6 +29,7 @@
     <table class="table table-responsive mt-3 table-striped table-hover ">
         <thead>
             <tr>
+                <th>@Html.DisplayNameFor(E => E.Image)</th>
                 <th>@Html.DisplayNameFor(E => E.Name)</th>
                 <th>@Html.DisplayNameFor(E => E.Age)</th>
                 <th>@Html.DisplayNameFor(E => E.Address)</th>
@@ -52,7 +39,7 @@
                 <th>@Html.DisplayNameFor(E => E.Email)</th>
                 <th>@Html.DisplayNameFor(E => E.PhoneNumber)</th>
                 <th>@Html.DisplayNameFor(E => E.HireDate)</th>
-                <th>@Html.DisplayNameFor(E => E.Image)</th>
+                
 
                 <th>Deatails</th>
                 <th>update</th>
@@ -63,6 +50,7 @@
             @foreach (var Emp in Model)
             {
                 <tr>
+                    <td><img src="~/Files/Images/@Emp.ImageName" class="image-size-100" alt="Alternate Text" /></td>
                     <td>@Emp.Name</td>
                     <td>@Emp.Age</td>
                     <td>@Emp.Address</td>
@@ -79,7 +67,6 @@
                     <td>@Html.DisplayFor(M => Emp.Email)</td>
                     <td>@Emp.PhoneNumber</td>
                     <td>@Emp.HireDate</td>
-                    <td><img src="~/Files/Images/@Emp.ImageName" class="image-size-100" alt="Alternate Text" /></td>
                     <partial model="Emp.Id.ToString()" name="_ButtonsPartial" />
                 </tr>
             }
