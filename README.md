@@ -16,3 +16,7 @@ This project is a basic implementation of CRUD (Create, Read, Update, Delete) op
 - **Backend**: (ASP.Net MVC )
 - **Frontend**:  (HTML , CSS ,Bootstrap)
 - **Database**:  (SQL Server )
+ 
+## Email To Use (Admin Email) To try All Features
+- Email (shehabsameh987123@gmail.com)
+- PassWord (Shehab123@)
