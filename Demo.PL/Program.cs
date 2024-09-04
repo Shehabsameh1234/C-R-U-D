@@ -21,7 +21,7 @@ namespace Demo.PL
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public async static Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +60,33 @@ namespace Demo.PL
             #endregion
            
             var app = builder.Build();
+
+            #region Asking Clr To Generate Object From storeContext
+            //1-Create scope (using keyword => dispose the scope after using it )
+            using var scope = app.Services.CreateScope();
+
+            //2-Create service
+            var service = scope.ServiceProvider;
+
+            //3-generate object from StoreContext and _IdentityDbContext
+            var _DbContext = service.GetRequiredService<AppDbConText>();
+            
+
+            //4- log the ex using loggerFactory Class and generate object from loggerFactory
+            var loggerFactory = service.GetRequiredService<ILoggerFactory>();
+            try
+            {
+                //4-add migration
+                await _DbContext.Database.MigrateAsync();
+                
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "an error has been occured during apply the migration");
+            }
+
+            #endregion
 
             #region Configure
             if (builder.Environment.IsDevelopment())
