@@ -1,6 +1,7 @@
 using Demo.BLl.Interfacies;
 using Demo.BLl.Repositories;
 using Demo.DAL.Data;
+using Demo.DAL.Data.IdentityContextSeedingData;
 using Demo.DAL.Models;
 using Demo.PL.Extetions;
 using Demo.PL.Helpers;
@@ -70,7 +71,8 @@ namespace Demo.PL
 
             //3-generate object from StoreContext and _IdentityDbContext
             var _DbContext = service.GetRequiredService<AppDbConText>();
-            
+           
+
 
             //4- log the ex using loggerFactory Class and generate object from loggerFactory
             var loggerFactory = service.GetRequiredService<ILoggerFactory>();
@@ -78,7 +80,11 @@ namespace Demo.PL
             {
                 //4-add migration
                 await _DbContext.Database.MigrateAsync();
-                
+
+                //identity seed
+                var _userManager = service.GetRequiredService<UserManager<ApplicationUser>>();
+                await IdentityContextSeedingData.IdentitySeedAsync(_userManager);
+
             }
             catch (Exception ex)
             {
