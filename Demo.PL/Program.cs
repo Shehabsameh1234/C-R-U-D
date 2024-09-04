@@ -83,7 +83,9 @@ namespace Demo.PL
 
                 //identity seed
                 var _userManager = service.GetRequiredService<UserManager<ApplicationUser>>();
-                await IdentityContextSeedingData.IdentitySeedAsync(_userManager);
+                var _roleManager = service.GetRequiredService<RoleManager<ApplicationRole>>();
+
+                await IdentityContextSeedingData.IdentitySeedAsync(_userManager, _roleManager);
 
             }
             catch (Exception ex)

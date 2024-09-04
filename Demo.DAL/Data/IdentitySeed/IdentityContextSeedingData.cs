@@ -10,7 +10,7 @@ namespace Demo.DAL.Data.IdentityContextSeedingData
 {
     public class IdentityContextSeedingData
     {
-        public static async Task IdentitySeedAsync(UserManager<ApplicationUser> _userManager)
+        public static async Task IdentitySeedAsync(UserManager<ApplicationUser> _userManager , RoleManager<ApplicationRole> _roleManager)
         {
 
             if (!_userManager.Users.Any())
@@ -24,7 +24,14 @@ namespace Demo.DAL.Data.IdentityContextSeedingData
                     FName = "user",
                     LName = "admin",
                 };
+                var role = new ApplicationRole()
+                { 
+                    Name ="Admin"
+                };
+
                 await _userManager.CreateAsync(user, "Shehab123@");
+                await _roleManager.CreateAsync(role);
+                await _userManager.AddToRoleAsync(user, role.Name);
             }
         }
     }
