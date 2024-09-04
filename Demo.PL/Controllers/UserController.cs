@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
 	{
 		private readonly UserManager<ApplicationUser> _userManager;

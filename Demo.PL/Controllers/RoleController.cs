@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers
 {
-	[Authorize(Roles = "ADMIN")]
+	[Authorize(Roles = "Admin")]
 	public class RoleController : Controller
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
