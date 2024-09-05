@@ -130,7 +130,8 @@ namespace Demo.PL.Controllers
                     };
                     EmailSettings.SendEmail(email);
                     return RedirectToAction("CheckYourInbox");
-                }  
+                }
+                ModelState.AddModelError(nameof(ForgetPasswordViewModel.Email), "email does not exist");
             }
 			return View(model);
 		}

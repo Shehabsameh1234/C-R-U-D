@@ -1,7 +1,6 @@
 ﻿@model ApplicationRole
-
+<div class="text-center text-danger" asp-validation-summary="All"></div>
 <div class="form-group">
-    <div class="text-center text-danger" asp-validation-summary="All"></div>
     <label class="col-form-label" asp-for="Name"></label>
     <input type="text" asp-for="Name" class="form-control" />
     <span asp-validation-for="Name" class="text-danger"></span>
