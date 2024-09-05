@@ -6,9 +6,12 @@
 <div class="main-agileinfo">
 	<div class="agileits-top">
 		<form asp-action="LogIn" method="post">
-			<div asp-validation-summary="All" class="text-light text-center" ></div>
+			<h3 class="text-center"><strong class="text-light">@TempData["Message"]</strong></h3>
 			<input class="text my-4" asp-for="Email" placeholder="Email" required="">
+			<span asp-validation-for="Email" class="text-light"></span>
 			<input class="text my-4 " asp-for="Password" placeholder="Password" required="">
+			<span asp-validation-for="Password" class="text-light"></span>
+
 			<div class="wthree-text mt-4 ">
 				<label class="anim">
 					<input type="checkbox" asp-for="RememberMe" class="checkbox" >

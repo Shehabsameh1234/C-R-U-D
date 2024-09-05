@@ -92,8 +92,9 @@ namespace Demo.PL.Controllers
                     }
                     
                 }
-                ModelState.AddModelError("Invalid", "Invalid Email or Password");
-            }
+
+				TempData["Message"] = "invalid email or password";
+			}
             return View(model);
         }
 		#endregion
