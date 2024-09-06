@@ -8,6 +8,8 @@ This project is a basic implementation of CRUD (Create, Read, Update, Delete) op
 - Read existing records
 - Update records
 - Delete records
+- LogIn And SignUp
+- Role Controll
 - User-friendly interface
 - Structured MVC architecture
 
