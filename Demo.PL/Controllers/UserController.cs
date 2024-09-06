@@ -24,17 +24,41 @@ namespace Demo.PL.Controllers
 		}
         
 
-        public async Task<IActionResult> Index(string SearchValue="")
+        public async Task<IActionResult> Index(string SearchInp )
 		{
-			List<ApplicationUser> users;
-			if (string.IsNullOrEmpty(SearchValue))
-				users = await _userManager.Users.ToListAsync();
-			else
-				users=await _userManager.Users.Where(user=>user.Email.Trim().ToLower().Contains(SearchValue.ToLower())).ToListAsync();
+            //List<ApplicationUser> users;
+            //if (string.IsNullOrEmpty(SearchInp))
+            //    users = await _userManager.Users.ToListAsync();
+            //else
+            //    users = await _userManager.Users.Where(user => user.Email.Trim().ToLower().Contains(SearchInp.ToLower())).ToListAsync();
 
-            return View(users);
-			
-		}
+            //return View(users);
+            List<ApplicationUser> users = new List<ApplicationUser>();
+            if (string.IsNullOrEmpty(SearchInp))
+            {
+                ViewData["InnerBtn"] = "search";
+                var allUsers = await _userManager.Users.ToListAsync();
+                
+                return View(allUsers);
+            }
+            else if (await _userManager.FindByEmailAsync(SearchInp)==null)
+            {
+                ViewData["InnerBtn"] = "search";
+                ViewData["Message"] = "there is no user called " + SearchInp;
+
+                var allUsers = await _userManager.Users.ToListAsync();
+
+                return View(allUsers);
+            }
+            else
+            {
+                ViewData["InnerBtn"] = "Get All";
+                var user =await _userManager.FindByEmailAsync(SearchInp);
+                users.Add(user);
+                return View(users);
+            }
+
+        }
         public async Task<IActionResult> Details(string id,string ViewName= "Details")
         {
             if (id == null)
