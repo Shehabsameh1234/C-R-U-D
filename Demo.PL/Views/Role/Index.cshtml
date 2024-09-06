@@ -3,6 +3,12 @@
     ViewData["Title"] = "Index";
 
 }
+@if (TempData["delete"] != null)
+{
+    <div class="text-center">
+        <span class="alert alert-danger col-8 mt-1 ">@TempData["delete"]</span>
+    </div>
+}
 
 <h1 class="my-3">All Roles</h1>
 

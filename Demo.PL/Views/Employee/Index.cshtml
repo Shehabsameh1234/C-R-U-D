@@ -13,18 +13,16 @@
 @if (Model.Count() > 0)
 {
     <div class="row justify-content-center align-items-center mt-5 ">
-        <form class="row col-8 offset-2" asp-action="Index">
-            <div class="col-8 ">
+        <form class="row w-100 text-center " asp-action="Index">
+            <div class="d-flex col-12 ">
                 <input type="text" class="form-control" name="SearchInp" placeholder="Search By Name" />
+                <input type="submit" value="@ViewData["InnerBtn"]" class="btn btn-success mx-2" />
             </div>
-            <div class="col-4">
-                <input type="submit" value="@ViewData["InnerBtn"]" class="btn btn-success" />
-            </div>
-            @if (ViewData["message"] != null)
+        </form>
+         @if (ViewData["message"] != null)
             {
                 <span class="alert alert-danger col-8 mt-1 text-center">@ViewData["Message"]</span>
             }
-        </form>
     </div>
     <table class="table table-responsive mt-3 table-striped table-hover ">
         <thead>

@@ -26,13 +26,7 @@ namespace Demo.PL.Controllers
 
         public async Task<IActionResult> Index(string SearchInp )
 		{
-            //List<ApplicationUser> users;
-            //if (string.IsNullOrEmpty(SearchInp))
-            //    users = await _userManager.Users.ToListAsync();
-            //else
-            //    users = await _userManager.Users.Where(user => user.Email.Trim().ToLower().Contains(SearchInp.ToLower())).ToListAsync();
-
-            //return View(users);
+        
             List<ApplicationUser> users = new List<ApplicationUser>();
             if (string.IsNullOrEmpty(SearchInp))
             {
@@ -119,6 +113,12 @@ namespace Demo.PL.Controllers
                 var user = await _userManager.FindByIdAsync(id);
                 if (user == null)
                     return NotFound();
+
+                if (user.Email == "shehabsameh987123@gmail.com")
+                {
+                    TempData["delete"] = "you can not delete this user";
+                    return RedirectToAction(nameof(Index));
+                }
 
                 var result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)

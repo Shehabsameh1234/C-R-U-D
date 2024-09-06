@@ -108,11 +108,16 @@ namespace Demo.PL.Controllers
 
             try
             {
-                var user = await _roleManager.FindByIdAsync(id);
-                if (user == null)
+                var role = await _roleManager.FindByIdAsync(id);
+                if (role == null)
                     return NotFound();
+                if (role.Name == "Admin")
+                {
+                    TempData["delete"] = "you can not delete this role";
+                    return RedirectToAction(nameof(Index));
+                }
 
-                var result = await _roleManager.DeleteAsync(user);
+                var result = await _roleManager.DeleteAsync(role);
                 if (result.Succeeded)
                 {
                     return RedirectToAction(nameof(Index));
@@ -166,6 +171,7 @@ namespace Demo.PL.Controllers
                     var appUser = await _UserManager.FindByIdAsync(user.UserID);
                     if (appUser != null)
                     {
+                      
                         if (user.IsSelected && !await _UserManager.IsInRoleAsync(appUser, role.Name))
                             await _UserManager.AddToRoleAsync(appUser, role.Name);
                         else if (!user.IsSelected && await _UserManager.IsInRoleAsync(appUser, role.Name))

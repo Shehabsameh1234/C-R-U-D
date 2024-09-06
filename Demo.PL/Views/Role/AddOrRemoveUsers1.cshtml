@@ -6,6 +6,9 @@
 
 }
 
+<div class="alert alert-warning text-center" role="alert">
+    if you change any role you have to logIn again
+</div>
 <h2>Add or remove users</h2>
 <form class="my-3" asp-action="AddOrRemoveUsers" asp-route-roleId="@roleId" >
     @for(var i =0; i<Model.Count;i++)
@@ -20,7 +23,6 @@
 
     }
     <input type="submit" value="Save" class="btn btn-primary" />
-    <span class="text-danger" >warning:if you change any role you have to logIn again</span>
     <a asp-action="Index"  class="btn btn-light">back to list</a>
 </form>
 
