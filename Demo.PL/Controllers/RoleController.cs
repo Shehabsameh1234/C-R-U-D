@@ -16,7 +16,7 @@ namespace Demo.PL.Controllers
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public UserManager<ApplicationUser> _UserManager { get; }
+        private readonly UserManager<ApplicationUser> _UserManager;
 
         public RoleController(RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager)
         {
@@ -66,6 +66,12 @@ namespace Demo.PL.Controllers
         }
         public async Task<IActionResult> Edit(string id)
         {
+            var signedUser = await _UserManager.GetUserAsync(User);
+            if (signedUser.IsVerified == false)
+            {
+                TempData["delete"] = "Please Verify Your Email";
+                return RedirectToAction(nameof(Index));
+            }
             return await Details(id, "Edit");
         }
         [HttpPost]
@@ -105,7 +111,12 @@ namespace Demo.PL.Controllers
         }
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
-
+            var signedUser = await _UserManager.GetUserAsync(User);
+            if (signedUser.IsVerified == false)
+            {
+                TempData["delete"] = "Please Verify Your Email";
+                return RedirectToAction(nameof(Index));
+            }
             try
             {
                 var role = await _roleManager.FindByIdAsync(id);
@@ -137,6 +148,12 @@ namespace Demo.PL.Controllers
         
         public async Task<IActionResult> AddOrRemoveUsers1(string roleId)
         {
+            var signedUser = await _UserManager.GetUserAsync(User);
+            if (signedUser.IsVerified == false)
+            {
+                TempData["delete"] = "Please Verify Your Email";
+                return RedirectToAction(nameof(Index));
+            }
             var role = await _roleManager.FindByIdAsync(roleId);
             ViewBag.roleId = roleId;
             if (role == null)

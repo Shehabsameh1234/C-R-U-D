@@ -13,6 +13,7 @@ namespace Demo.DAL.Models
         public string FName { get; set; }
 		public string LName { get; set; }
 		public bool IsVerified { get; set; }=false;
-
+		public string Code { get; set; }
+		
     }
 }

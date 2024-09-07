@@ -49,6 +49,13 @@
                         <li class="nav-item">
                             <a class="nav-link  text-dark btn btn-outline-danger " asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a>
                         </li>
+                        <li class="nav-item">
+                             @if (signInManager.IsSignedIn(User))
+                             {
+                               var user = await userManager.GetUserAsync(User);
+                               <h4 class="text=Dark mt-1 text-center my-1  mx-2 text-success">Welcome @user.FName</h4>
+                             }
+                        </li>
                     </ul>
                     <ul class="navbar-nav flex-grow-5">
                         @if (signInManager.IsSignedIn(User))

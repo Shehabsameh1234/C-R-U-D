@@ -175,10 +175,16 @@ namespace Demo.PL.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
+                var user =await  _userManager.GetUserAsync(User);
+                if (user.IsVerified == true)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
                 Random random = new Random();
                 string randomCode = random.Next(1000, 10000).ToString();
-                TempData["Code"]=randomCode;
-                var user =await  _userManager.GetUserAsync(User);
+                user.Code = randomCode;
+                await _userManager.UpdateAsync(user);
                 var email = new Email()
                 {
                     Title = "Code For Verifaction",
@@ -194,9 +200,9 @@ namespace Demo.PL.Controllers
         [HttpPost]
         public async Task<ActionResult> EmailVerifaction(int code)
         {
-            if(code.ToString() == (string)TempData["Code"])
+            var user = await _userManager.GetUserAsync(User);
+            if (code.ToString() == user.Code)
             {
-                var user = await _userManager.GetUserAsync(User);
                 user.IsVerified = true;
                 await _userManager.UpdateAsync(user);
                 return RedirectToAction("Index", "Home");
