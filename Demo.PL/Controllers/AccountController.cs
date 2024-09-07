@@ -87,7 +87,7 @@ namespace Demo.PL.Controllers
                        var result=await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                         if(result.Succeeded)
                         {
-							return RedirectToAction(nameof(HomeController.Index),"Home");
+                                return RedirectToAction(nameof(HomeController.Index), "Home");
 						}
                     }
                     
@@ -166,7 +166,38 @@ namespace Demo.PL.Controllers
 			}
             return View(model);
 		}
-		#endregion
+        #endregion
 
-	}
+        #region email verifaction
+        [HttpGet]
+        public async Task<ActionResult> EmailVerifaction()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user =await  _userManager.GetUserAsync(User);
+                var email = new Email()
+                {
+                    Title = "Code For Verifaction",
+                    To = user.Email,
+                    Body = "1234",
+                };
+                EmailSettings.SendEmail(email);
+
+            }
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> EmailVerifaction(int code)
+        {
+            if(code ==1234)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
+           return View();
+        }
+        #endregion
+
+    }
 }

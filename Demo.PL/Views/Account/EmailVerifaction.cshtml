@@ -1,0 +1,16 @@
+﻿@model EmailVerify
+@{
+    ViewData["Title"] = "EmailVerifaction";
+    
+}
+
+<h1 class="text-center text-success">Email Verifaction</h1>
+<h4 class="text-center">please enter the code that we sent to your email</h4>
+
+<form asp-action="EmailVerifaction" method="post">
+    <div class="text-center d-flex">
+        <input type="text" class="form-control" asp-for="Code" placeholder="Search By Name" />
+        <input type="submit" value="submit" class="btn btn-success mx-2" />
+    </div>
+
+</form>

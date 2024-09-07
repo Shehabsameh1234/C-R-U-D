@@ -12,6 +12,7 @@ namespace Demo.DAL.Models
 		public bool IsAgree {  get; set; }
         public string FName { get; set; }
 		public string LName { get; set; }
+		public bool IsVerified { get; set; }=false;
 
-	}
+    }
 }

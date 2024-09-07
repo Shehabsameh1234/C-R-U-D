@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<ApplicationUser> signInManager ;
+@inject UserManager<ApplicationUser> userManager ;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,13 +45,25 @@
                         }
                     </ul>
 
-                    <ul class="navbar-nav flex-grow-1">
-                       
+                    <ul class="navbar-nav flex-grow-5">
                         <li class="nav-item">
                             <a class="nav-link  text-dark btn btn-outline-danger " asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav flex-grow-5">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            var user = await userManager.GetUserAsync(User);
+                            if (user.IsVerified == false)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light mx-5 my-2  btn-danger btn" asp-area="" asp-controller="Account" asp-action="EmailVerifaction">please Verify your email</a>
+                                </li>
+                            }
+                        }
+                    </ul>
                 </div>
+
             </div>
         </nav>
     </header>
