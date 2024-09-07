@@ -4,6 +4,7 @@ using Demo.PL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 
@@ -159,7 +160,7 @@ namespace Demo.PL.Controllers
 					foreach (var errors in result.Errors)
 					{
 						ModelState.AddModelError("Email", errors.Description);
-						ModelState.AddModelError(string.Empty, errors.Description);
+						ModelState.AddModelError(nameof(model.Password), errors.Description);
 
 					}
 				}
@@ -174,12 +175,15 @@ namespace Demo.PL.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
+                Random random = new Random();
+                string randomCode = random.Next(1000, 10000).ToString();
+                TempData["Code"]=randomCode;
                 var user =await  _userManager.GetUserAsync(User);
                 var email = new Email()
                 {
                     Title = "Code For Verifaction",
                     To = user.Email,
-                    Body = "1234",
+                    Body = randomCode,
                 };
                 EmailSettings.SendEmail(email);
 
@@ -190,12 +194,15 @@ namespace Demo.PL.Controllers
         [HttpPost]
         public async Task<ActionResult> EmailVerifaction(int code)
         {
-            if(code ==1234)
+            if(code.ToString() == (string)TempData["Code"])
             {
+                var user = await _userManager.GetUserAsync(User);
+                user.IsVerified = true;
+                await _userManager.UpdateAsync(user);
                 return RedirectToAction("Index", "Home");
             }
-            
-           return View();
+            ModelState.AddModelError(nameof(code), "Incorrect Code");
+            return View();
         }
         #endregion
 

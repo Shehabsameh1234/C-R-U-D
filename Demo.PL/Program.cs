@@ -43,10 +43,10 @@ namespace Demo.PL
 
             builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
             {
-                config.Password.RequiredUniqueChars = 0;
-                config.Password.RequireUppercase = false;
-                config.Password.RequireLowercase = false;
-                config.Password.RequiredLength = 3;
+                config.Password.RequiredUniqueChars = 1;
+                config.Password.RequireUppercase = true;
+                config.Password.RequireLowercase = true;
+                config.Password.RequiredLength = 6;
                 config.Password.RequireNonAlphanumeric = false;
                 config.User.RequireUniqueEmail = true;
                 

@@ -18,10 +18,12 @@ namespace Demo.PL.Controllers
     public class UserController : Controller
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
-		public UserController(UserManager<ApplicationUser> userManager)
+   
+        public UserController(UserManager<ApplicationUser> userManager)
         {
 			_userManager = userManager;
-		}
+            
+        }
         
 
         public async Task<IActionResult> Index(string SearchInp )
@@ -68,6 +70,12 @@ namespace Demo.PL.Controllers
         }
         public async Task<IActionResult> Edit(string id)
         {
+            var signedUser = await _userManager.GetUserAsync(User);
+            if (signedUser.IsVerified == false)
+            {
+                TempData["delete"] = "Please Verify Your Email";
+                return RedirectToAction(nameof(Index));
+            }
             return await Details(id, "Edit");
         }
         [HttpPost]
@@ -107,7 +115,12 @@ namespace Demo.PL.Controllers
         }
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
-
+            var signedUser = await _userManager.GetUserAsync(User);
+            if (signedUser.IsVerified == false)
+            {
+                TempData["delete"] = "Please Verify Your Email";
+                return RedirectToAction(nameof(Index));
+            }
             try
             {
                 var user = await _userManager.FindByIdAsync(id);
@@ -117,6 +130,11 @@ namespace Demo.PL.Controllers
                 if (user.Email == "shehabsameh987123@gmail.com")
                 {
                     TempData["delete"] = "you can not delete this user";
+                    return RedirectToAction(nameof(Index));
+                }
+                if (user.Id == signedUser.Id)
+                {
+                    TempData["delete"] = "you can not delete current user";
                     return RedirectToAction(nameof(Index));
                 }
 

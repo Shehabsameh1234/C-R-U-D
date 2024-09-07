@@ -23,6 +23,7 @@ namespace Demo.DAL.Data.IdentityContextSeedingData
                     IsAgree = true,
                     FName = "user",
                     LName = "admin",
+                    IsVerified = true,
                 };
                 var role = new ApplicationRole()
                 { 
