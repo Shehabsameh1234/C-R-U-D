@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EmpViewModel>
+<table class="table table-responsive mt-3 table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(E => E.Image)</th>
+            <th>@Html.DisplayNameFor(E => E.Name)</th>
+            <th>@Html.DisplayNameFor(E => E.Age)</th>
+            <th>@Html.DisplayNameFor(E => E.Address)</th>
+            <th>@Html.DisplayNameFor(E => E.Department)</th>
+            <th>@Html.DisplayNameFor(E => E.Salary)</th>
+            <th>@Html.DisplayNameFor(E => E.IsActive)</th>
+            <th>@Html.DisplayNameFor(E => E.Email)</th>
+            <th>@Html.DisplayNameFor(E => E.PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(E => E.HireDate)</th>
+
+
+            <th>Deatails</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Emp in Model)
+        {
+            <tr>
+                <td><img src="~/Files/Images/@Emp.ImageName" class="image-size-100" alt="Alternate Text" /></td>
+                <td>@Emp.Name</td>
+                <td>@Emp.Age</td>
+                <td>@Emp.Address</td>
+                @if (string.IsNullOrEmpty(@Emp.Department?.Name))
+                {
+                    <td>no department</td>
+                }
+                else
+                {
+                    <td>@Emp.Department?.Name</td>
+                }
+
+                <td>@Html.DisplayFor(M => Emp.Salary)</td>
+                <td>@Html.DisplayFor(M => Emp.IsActive)</td>
+                <td>@Html.DisplayFor(M => Emp.Email)</td>
+                <td>@Emp.PhoneNumber</td>
+                <td>@Emp.HireDate</td>
+                <partial model="Emp.Id.ToString()" name="_ButtonsPartial" />
+            </tr>
+        }
+    </tbody>
+</table>

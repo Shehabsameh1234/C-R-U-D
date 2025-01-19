@@ -28,32 +28,36 @@ namespace Demo.PL.Controllers
             _unitOfWork = unitOfWork;
             
         }
-        public IActionResult Index(string SearchInp)
+        public IActionResult Index()
         {
 
-            if (string.IsNullOrEmpty(SearchInp))
-            {
-                ViewData["InnerBtn"] = "search";
+          
+
+                
                 var Emp = _unitOfWork.EmployeeRepository.GetAll();
                 var mappedEmp = _mapper.Map<IEnumerable<Employee>,IEnumerable<EmpViewModel>>(Emp);
                 return View(mappedEmp);
-            }
-            else if(_unitOfWork.EmployeeRepository.GetEmpByName(SearchInp.ToLower()).Count() == 0)
+            
+            
+            
+        }
+        public IActionResult Search(string SearchInpId)
+        {
+            if (string.IsNullOrEmpty(SearchInpId))
             {
-                ViewData["InnerBtn"] = "search";
-                ViewData["Message"] = "there is no employee called " + SearchInp;
 
                 var Emp = _unitOfWork.EmployeeRepository.GetAll();
                 var mappedEmp = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmpViewModel>>(Emp);
-                return View(mappedEmp);
+                return PartialView("EmpTablePartialView", mappedEmp);
+
             }
-            else 
+            else
             {
-                ViewData["InnerBtn"] = "Get All";
-                var emp= _unitOfWork.EmployeeRepository.GetEmpByName(SearchInp.ToLower());
+                var emp = _unitOfWork.EmployeeRepository.GetEmpByName(SearchInpId.ToLower());
                 var mappedEmp = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmpViewModel>>(emp);
-                return View(mappedEmp);
-            } 
+                return PartialView("EmpTablePartialView", mappedEmp);
+            }
+            
         }
         public IActionResult Create()
         {
