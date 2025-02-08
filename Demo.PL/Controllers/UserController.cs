@@ -1,15 +1,11 @@
-﻿using Demo.DAL.Data;
-using Demo.DAL.Models;
-using Demo.PL.Helpers;
-using Demo.PL.ViewModels;
+﻿using Demo.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers

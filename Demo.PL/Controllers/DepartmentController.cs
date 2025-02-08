@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using Demo.BLl.Interfacies;
-using Demo.BLl.Repositories;
 using Demo.DAL.Models;
 using Demo.PL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
 
 namespace Demo.PL.Controllers

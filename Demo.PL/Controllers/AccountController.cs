@@ -1,7 +1,6 @@
 ﻿using Demo.DAL.Models;
 using Demo.PL.Helpers;
 using Demo.PL.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;

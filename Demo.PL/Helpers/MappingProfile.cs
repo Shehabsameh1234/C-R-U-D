@@ -13,8 +13,6 @@ namespace Demo.PL.Helpers
             CreateMap<EmpViewModel, Employee>().ReverseMap();
             CreateMap<DepartmentViewModel, Department>().ReverseMap();
 
-          
-
         }
     }
 }

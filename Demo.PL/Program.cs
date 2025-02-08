@@ -29,7 +29,6 @@ namespace Demo.PL
             #region  ConfigureServices
             builder.Services.AddControllersWithViews();
 
-
             //defualt is addScoped
             builder.Services.AddDbContext<AppDbConText>(options =>
             {
@@ -104,7 +103,6 @@ namespace Demo.PL
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

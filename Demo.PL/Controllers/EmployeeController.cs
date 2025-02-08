@@ -30,15 +30,10 @@ namespace Demo.PL.Controllers
         }
         public IActionResult Index()
         {
-
-          
-
                 
                 var Emp = _unitOfWork.EmployeeRepository.GetAll();
                 var mappedEmp = _mapper.Map<IEnumerable<Employee>,IEnumerable<EmpViewModel>>(Emp);
                 return View(mappedEmp);
-            
-            
             
         }
         public IActionResult Search(string SearchInpId)
